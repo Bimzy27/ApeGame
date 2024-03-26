@@ -12,6 +12,7 @@ import com.bimzygames.apegame.entities.cameras.CameraGame;
 import com.bimzygames.apegame.entities.cameras.CameraLayer;
 import com.bimzygames.apegame.entities.cameras.CameraUI;
 import com.bimzygames.apegame.entities.cameras.ICamera;
+import com.bimzygames.apegame.services.FontService;
 
 public class TextRenderer implements IComponent, IRenderer
 {
@@ -25,7 +26,7 @@ public class TextRenderer implements IComponent, IRenderer
 
     public TextRenderer(String text, RectBounds rectBounds, int sortOrder, CameraLayer cameraLayer)
     {
-        _font = new BitmapFont();
+        _font = DIContainer.getInstance().resolve(FontService.class).headerFont;
         _text = text;
         _rectBounds = rectBounds;
         _sortOrder = sortOrder;

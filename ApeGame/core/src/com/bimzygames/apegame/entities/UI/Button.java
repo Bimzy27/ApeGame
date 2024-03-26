@@ -20,7 +20,7 @@ public class Button extends Entity
     {
         super(position,
               new SpriteRenderer(rect, "UI/buttonSquare_blue.png", sortOrder, CameraLayer.UI),
-              new TextRenderer(text, new RectBounds(rect, new Bounds(40)), sortOrder + 1, CameraLayer.UI),
+              new TextRenderer(text, new RectBounds(rect, new Bounds(40, 60, 40, 40)), sortOrder + 1, CameraLayer.UI),
               new ClickReceiver(getCamera(CameraLayer.UI), rect, clickAction));
     }
 }

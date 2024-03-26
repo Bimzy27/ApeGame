@@ -2,6 +2,7 @@ package com.bimzygames.apegame;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bimzygames.apegame.entities.Viewport;
+import com.bimzygames.apegame.services.FontService;
 import com.bimzygames.apegame.services.InputService;
 import com.bimzygames.apegame.services.SceneLoaderService;
 
@@ -13,6 +14,7 @@ public class Installer
                 {
                         new SpriteBatch(),
                         new Viewport(),
+                        new FontService(),
                         new InputService(),
                         new SceneLoaderService()
                 };
