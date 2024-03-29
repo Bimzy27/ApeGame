@@ -22,4 +22,9 @@ public class Color {
         this.b = (float) color.getBlue() / divisor;
         this.a = (float) color.getAlpha() / divisor;
     }
+
+    public com.badlogic.gdx.graphics.Color asGdxColor()
+    {
+        return new com.badlogic.gdx.graphics.Color(r, g, b, a);
+    }
 }

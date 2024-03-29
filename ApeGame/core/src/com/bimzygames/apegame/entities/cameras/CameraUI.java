@@ -79,7 +79,7 @@ public class CameraUI extends Entity implements ICamera
         spriteBatch.setProjectionMatrix(_camera.combined);
         for (IRenderer renderer : _sortedRenderers.values())
         {
-            renderer.render(spriteBatch);
+            renderer.getRenderOperation().render(spriteBatch, renderer.getX(), renderer.getY());
         }
         spriteBatch.end();
     }

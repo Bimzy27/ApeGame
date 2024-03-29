@@ -70,38 +70,45 @@ public class TextRenderer implements IComponent, IRenderer
         _sortOrder = sortOrder;
     }
 
-    private float getX()
+    @Override
+    public float getX()
     {
         float centerX = _transform.position.x + ((-_rectBounds.bounds.right + _rectBounds.bounds.left) * 0.5f);
         GlyphLayout layout = new GlyphLayout(_font, _text);
-        return centerX - layout.width / 2f;
-    }
-
-    private float getY()
-    {
-        float centerY = _transform.position.y + ((-_rectBounds.bounds.top + _rectBounds.bounds.bottom) * 0.5f);
-        GlyphLayout layout = new GlyphLayout(_font, _text);
-        return centerY + layout.height / 2f;
+        return (centerX - layout.width / 2f) * calculateFontScaleX();
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    public float getY()
+    {
+        float centerY = _transform.position.y + ((-_rectBounds.bounds.top + _rectBounds.bounds.bottom) * 0.5f);
+        GlyphLayout layout = new GlyphLayout(_font, _text);
+        return (centerY + layout.height / 2f) * calculateFontScaleX();
+    }
+
+    @Override
+    public IRenderOperation getRenderOperation() {
+        return this;
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch, float x, float y) {
         float fontScaleX = calculateFontScaleX();
         float fontScaleY = calculateFontScaleY();
         _font.getData().setScale(fontScaleX, fontScaleY);
-        _font.draw(spriteBatch, _text, getX(), getY());
+        _font.draw(spriteBatch, _text, x, y);
         _font.getData().setScale(1.0f);
     }
 
     private float calculateFontScaleX() {
         GlyphLayout layout = new GlyphLayout(_font, _text);
-        float width = _rectBounds.getLeft() + _rectBounds.getRight();
+        float width = _rectBounds.getBoundedRect().width;
         return width / layout.width;
     }
 
     private float calculateFontScaleY() {
         GlyphLayout layout = new GlyphLayout(_font, _text);
-        float rectHeight = _rectBounds.getTop() + _rectBounds.getBottom();
-        return rectHeight / layout.height;
+        float height = _rectBounds.getBoundedRect().height;
+        return height / layout.height;
     }
 }

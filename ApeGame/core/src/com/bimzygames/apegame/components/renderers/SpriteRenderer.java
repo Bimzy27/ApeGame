@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.bimzygames.apegame.DIContainer;
 import com.bimzygames.apegame.common.Rect;
 import com.bimzygames.apegame.components.IComponent;
@@ -24,6 +23,7 @@ public class SpriteRenderer implements IComponent, IRenderer
     private Transform _transform;
     private Texture _modifiedTexture;
     private ICamera _camera;
+    private IRenderOperation _renderOperation = this;
 
     public SpriteRenderer(Rect rect, Texture texture, int sortOrder, CameraLayer cameraLayer)
     {
@@ -58,6 +58,10 @@ public class SpriteRenderer implements IComponent, IRenderer
         this(new Rect(new Texture(spritePath).getWidth(), new Texture(spritePath).getHeight()), new Texture(spritePath), sortOrder, CameraLayer.Game);
     }
 
+    public void overrideRenderOperation(IRenderOperation renderOperation)
+    {
+        _renderOperation = renderOperation;
+    }
 
     @Override
     public void Initialize(Entity entity)
@@ -100,19 +104,28 @@ public class SpriteRenderer implements IComponent, IRenderer
         _sortOrder = sortOrder;
     }
 
-    private float getX()
-    {
-        return _transform.position.x - (_rect.width * 0.5F);
-    }
+    @Override
+    public float getX() { return _transform.position.x - (_rect.width * 0.5F); }
 
-    private float getY()
+    @Override
+    public float getY()
     {
         return _transform.position.y - (_rect.height * 0.5F);
     }
 
+    public Texture getTexture()
+    {
+        return _modifiedTexture;
+    }
     @Override
-    public void render(SpriteBatch spriteBatch) {
-        spriteBatch.draw(_modifiedTexture, getX(), getY());
+    public IRenderOperation getRenderOperation() {
+        return _renderOperation;
+    }
+
+    @Override
+    public void render(SpriteBatch spriteBatch, float x, float y)
+    {
+        spriteBatch.draw(_modifiedTexture, x, y);
     }
 
     private void RefreshTexture()

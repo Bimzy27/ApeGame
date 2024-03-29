@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.bimzygames.apegame.DIContainer;
 import com.bimzygames.apegame.actions.IAction;
+import com.bimzygames.apegame.common.Time;
+import com.bimzygames.apegame.debug.Logger;
 import com.bimzygames.apegame.services.InputService;
 import com.bimzygames.apegame.entities.Entity;
 
@@ -48,10 +50,8 @@ public class PlayerController implements IComponent
 
     @Override
     public void update() {
-
-        float deltaTime = Gdx.graphics.getDeltaTime();
         _input.nor();
-        _transform.translate(new Vector2(deltaTime * _speed * _input.x, deltaTime * _speed * _input.y));
+        _transform.translate(new Vector2(Time.deltaTime() * _speed * _input.x, Time.deltaTime() * _speed * _input.y));
     }
 
     public void keyDown(int keycode) {

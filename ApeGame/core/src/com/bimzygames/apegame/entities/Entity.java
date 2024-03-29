@@ -38,6 +38,15 @@ public class Entity implements IComponent
     {
         _components.add(component);
     }
+    public IComponent getComponent(int index)
+    {
+        if (index < _components.stream().count())
+        {
+            return _components.get(index);
+        }
+
+        throw new IndexOutOfBoundsException();
+    }
 
     @Override
     public void Initialize(Entity entity) {

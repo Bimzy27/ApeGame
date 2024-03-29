@@ -7,6 +7,7 @@ import com.bimzygames.apegame.debug.Logger;
 import com.bimzygames.apegame.scenes.IScene;
 import com.bimzygames.apegame.scenes.MenuScene;
 import com.bimzygames.apegame.services.SceneLoaderService;
+import com.bimzygames.apegame.services.UpdateService;
 
 import static com.bimzygames.apegame.common.Definitions.DefaultBackgroundColor;
 
@@ -14,7 +15,6 @@ public class Main extends ApplicationAdapter {
 
 	Installer installer;
 	SceneLoaderService sceneLoaderService;
-
 	@Override
 	public void create () {
 		Logger.Log("Create Main");
@@ -27,8 +27,8 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(DefaultBackgroundColor.r, DefaultBackgroundColor.g, DefaultBackgroundColor.b, DefaultBackgroundColor.a);
-		IScene scene = sceneLoaderService.getActiveScene();
-		scene.update();
+
+		UpdateService.getInstance().update();
 	}
 
 	@Override

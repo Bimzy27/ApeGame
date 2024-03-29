@@ -8,11 +8,11 @@ import com.bimzygames.apegame.common.Rect;
 import com.bimzygames.apegame.components.CameraPlayerFollower;
 import com.bimzygames.apegame.components.ClickReceiver;
 import com.bimzygames.apegame.components.renderers.GameSortOrders;
-import com.bimzygames.apegame.entities.Viewport;
+import com.bimzygames.apegame.entities.*;
+import com.bimzygames.apegame.entities.UI.Healthbar;
+import com.bimzygames.apegame.entities.UI.Slider;
 import com.bimzygames.apegame.entities.cameras.CameraLayer;
 import com.bimzygames.apegame.components.renderers.SpriteRenderer;
-import com.bimzygames.apegame.entities.Entity;
-import com.bimzygames.apegame.entities.Player;
 import com.bimzygames.apegame.entities.cameras.CameraGame;
 import com.bimzygames.apegame.entities.cameras.CameraUI;
 import com.bimzygames.apegame.services.SceneLoaderService;
@@ -26,7 +26,7 @@ public class GameScene extends Scene
 {
     @Override
     protected void CreateCameras() {
-        _cameraGame = new CameraGame(new CameraPlayerFollower());
+        _cameraGame = new CameraGame(new CameraPlayerFollower(250, 750));
         _cameraUI = new CameraUI();
     }
 
@@ -35,12 +35,12 @@ public class GameScene extends Scene
     {
         Entity tree = new Entity(new Vector2(200, 200),
                 new SpriteRenderer(new Rect(117, 128), "tree_oak.png", GameSortOrders.Foreground.getValue()));
-        Entity healthbar = new Entity(new Vector2(0, 450), new SpriteRenderer(new Rect(400, 60), "UI/barRed_horizontalMid.png", GameSortOrders.Healthbar.getValue(), CameraLayer.UI));
 
         List<Entity> entities = new ArrayList<>(super.getEntities());
         entities.add(tree);
+        entities.add(new Castle(new Rect(120, 120)));
         entities.add(new Player(new Rect(35, 64)));
-        entities.add(healthbar);
+        entities.add(new Enemy(new Rect(35, 35)));
         return entities;
     }
 }

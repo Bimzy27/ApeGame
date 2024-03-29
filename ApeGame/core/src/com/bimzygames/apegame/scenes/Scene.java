@@ -2,10 +2,12 @@ package com.bimzygames.apegame.scenes;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bimzygames.apegame.DIContainer;
+import com.bimzygames.apegame.IUpdater;
 import com.bimzygames.apegame.entities.Entity;
 import com.bimzygames.apegame.entities.Viewport;
 import com.bimzygames.apegame.entities.cameras.CameraGame;
 import com.bimzygames.apegame.entities.cameras.CameraUI;
+import com.bimzygames.apegame.services.UpdateService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +38,13 @@ public abstract class Scene implements IScene {
 
         Viewport viewport = DIContainer.getInstance().resolve(Viewport.class);
         viewport.Initialize(viewport);
+
+        UpdateService.getInstance().AddUpdater(this);
     }
 
     @Override
     public void unload() {
+        UpdateService.getInstance().RemoveUpdater(this);
 
         for (Entity entity : _entities) {
             entity.Deinitialize();
