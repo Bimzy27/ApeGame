@@ -3,6 +3,8 @@ package com.bimzygames.apegame.scenes;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bimzygames.apegame.DIContainer;
 import com.bimzygames.apegame.IUpdater;
+import com.bimzygames.apegame.components.IComponent;
+import com.bimzygames.apegame.components.Transform;
 import com.bimzygames.apegame.entities.Entity;
 import com.bimzygames.apegame.entities.Viewport;
 import com.bimzygames.apegame.entities.cameras.CameraGame;
@@ -18,8 +20,7 @@ public abstract class Scene implements IScene {
     protected CameraUI _cameraUI;
     private final SpriteBatch _spriteBatch;
 
-    public Scene()
-    {
+    public Scene() {
         _spriteBatch = DIContainer.getInstance().resolve(SpriteBatch.class);
         CreateCameras();
     }
@@ -32,6 +33,7 @@ public abstract class Scene implements IScene {
     @Override
     public void load() {
         _entities = getEntities();
+        SetEntityParents();
         for (Entity entity : _entities) {
             entity.Initialize(entity);
         }
@@ -67,5 +69,25 @@ public abstract class Scene implements IScene {
         entities.add(_cameraGame);
         entities.add(_cameraUI);
         return entities;
+    }
+
+    private void SetEntityParents() {
+        for (Entity entity : _entities)
+        {
+            SetParents(entity);
+        }
+    }
+
+    private void SetParents(Entity entity)
+    {
+        Transform parent = entity.getTransform();
+        for (IComponent component : entity.getComponents())
+        {
+            if (component instanceof Entity) {
+                Entity childEntity = (Entity) component;
+                childEntity.setParent(parent);
+                SetParents(childEntity);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.bimzygames.apegame.DIContainer;
 import com.bimzygames.apegame.components.IComponent;
+import com.bimzygames.apegame.components.Transform;
 import com.bimzygames.apegame.entities.Entity;
 import com.bimzygames.apegame.components.renderers.IRenderer;
 
@@ -74,7 +75,7 @@ public class CameraGame extends Entity implements ICamera
     public void render(SpriteBatch spriteBatch)
     {
         spriteBatch.begin();
-        _camera.position.set(getTransform().position.x, getTransform().position.y, 0);
+        _camera.position.set(getTransform().getPosition().x, getTransform().getPosition().y, 0);
         _camera.update();
         spriteBatch.setProjectionMatrix(_camera.combined);
         for (IRenderer renderer : _sortedRenderers.values())

@@ -48,8 +48,8 @@ public class ClickReceiver implements IComponent
     }
 
     public void touchDown(int screenX, int screenY, int pointer, int button) {
-        Vector2 input = new Vector2(screenX, screenY).add(_camera.getTransform().position);
-        if (WithinBounds(input, _transform.position, _rect))
+        Vector2 input = new Vector2(screenX, screenY).add(_camera.getTransform().getPosition());
+        if (WithinBounds(input, _transform.getPosition(), _rect))
         {
             _clickAction.execute();
         }

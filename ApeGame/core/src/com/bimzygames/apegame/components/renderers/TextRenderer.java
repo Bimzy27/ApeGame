@@ -73,7 +73,7 @@ public class TextRenderer implements IComponent, IRenderer
     @Override
     public float getX()
     {
-        float centerX = _transform.position.x + ((-_rectBounds.bounds.right + _rectBounds.bounds.left) * 0.5f);
+        float centerX = _transform.getPosition().x + ((-_rectBounds.bounds.right + _rectBounds.bounds.left) * 0.5f);
         GlyphLayout layout = new GlyphLayout(_font, _text);
         return (centerX - layout.width / 2f) * calculateFontScaleX();
     }
@@ -81,7 +81,7 @@ public class TextRenderer implements IComponent, IRenderer
     @Override
     public float getY()
     {
-        float centerY = _transform.position.y + ((-_rectBounds.bounds.top + _rectBounds.bounds.bottom) * 0.5f);
+        float centerY = _transform.getPosition().y + ((-_rectBounds.bounds.top + _rectBounds.bounds.bottom) * 0.5f);
         GlyphLayout layout = new GlyphLayout(_font, _text);
         return (centerY + layout.height / 2f) * calculateFontScaleX();
     }

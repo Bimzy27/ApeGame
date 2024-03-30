@@ -14,8 +14,7 @@ public class Installer
                         new Viewport(),
                         new FontService(),
                         new InputService(),
-                        new SceneLoaderService(),
-                        new CollisionService(),
+                        new SceneLoaderService()
                 };
     }
 

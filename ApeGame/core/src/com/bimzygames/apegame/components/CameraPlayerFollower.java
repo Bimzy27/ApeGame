@@ -1,13 +1,11 @@
 package com.bimzygames.apegame.components;
 
-import com.badlogic.gdx.math.Vector2;
 import com.bimzygames.apegame.DIContainer;
-import com.bimzygames.apegame.common.Time;
 import com.bimzygames.apegame.entities.Entity;
 import com.bimzygames.apegame.entities.Player;
 
 import static com.bimzygames.apegame.common.Math.Distance;
-import static com.bimzygames.apegame.common.Math.Lerp;
+import static com.bimzygames.apegame.common.VectorUtilities.Lerp;
 
 public class CameraPlayerFollower implements IComponent
 {
@@ -36,11 +34,11 @@ public class CameraPlayerFollower implements IComponent
 
     @Override
     public void update() {
-        float dst = Distance(_player.getTransform().position, _transform.position);
+        float dst = Distance(_player.getTransform().getPosition(), _transform.getPosition());
         if (dst <= offset)
         {
             return;
         }
-        _transform.position = Lerp(_transform.position, _player.getTransform().position, (dst-offset)/lerpStrength);
+        _transform.setPosition(Lerp(_transform.getPosition(), _player.getTransform().getPosition(), (dst-offset)/lerpStrength));
     }
 }

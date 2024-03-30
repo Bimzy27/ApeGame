@@ -14,6 +14,8 @@ import com.bimzygames.apegame.entities.cameras.CameraLayer;
 import com.bimzygames.apegame.entities.cameras.CameraUI;
 import com.bimzygames.apegame.entities.cameras.ICamera;
 
+import static com.bimzygames.apegame.common.TransformUtilities.getRootPosition;
+
 public class SpriteRenderer implements IComponent, IRenderer
 {
     private final Rect _rect;
@@ -105,12 +107,12 @@ public class SpriteRenderer implements IComponent, IRenderer
     }
 
     @Override
-    public float getX() { return _transform.position.x - (_rect.width * 0.5F); }
+    public float getX() { return getRootPosition(_transform).x - (_rect.width * 0.5F); }
 
     @Override
     public float getY()
     {
-        return _transform.position.y - (_rect.height * 0.5F);
+        return getRootPosition(_transform).y - (_rect.height * 0.5F);
     }
 
     public Texture getTexture()

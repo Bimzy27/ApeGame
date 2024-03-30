@@ -48,12 +48,12 @@ public class MoveTowards implements IComponent
             return;
         }
 
-        if (Distance(transform.position, target.getTransform().position) <= stoppingDistance)
+        if (Distance(transform.getPosition(), target.getTransform().getPosition()) <= stoppingDistance)
         {
             return;
         }
 
-        Vector2 direction = new Vector2(target.getTransform().position).sub(transform.position).nor();
+        Vector2 direction = new Vector2(target.getTransform().getPosition()).sub(transform.getPosition()).nor();
         Vector2 movementStep = new Vector2(Time.deltaTime() * speed * direction.x, Time.deltaTime() * speed * direction.y);
         transform.translate(movementStep);
     }

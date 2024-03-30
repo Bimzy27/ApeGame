@@ -6,6 +6,7 @@ import com.bimzygames.apegame.entities.Viewport;
 import com.bimzygames.apegame.debug.Logger;
 import com.bimzygames.apegame.scenes.IScene;
 import com.bimzygames.apegame.scenes.MenuScene;
+import com.bimzygames.apegame.services.CollisionService;
 import com.bimzygames.apegame.services.SceneLoaderService;
 import com.bimzygames.apegame.services.UpdateService;
 
@@ -29,6 +30,7 @@ public class Main extends ApplicationAdapter {
 		ScreenUtils.clear(DefaultBackgroundColor.r, DefaultBackgroundColor.g, DefaultBackgroundColor.b, DefaultBackgroundColor.a);
 
 		UpdateService.getInstance().update();
+		CollisionService.getInstance().update();
 	}
 
 	@Override

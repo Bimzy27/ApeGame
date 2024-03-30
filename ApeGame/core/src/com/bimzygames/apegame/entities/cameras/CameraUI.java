@@ -74,7 +74,7 @@ public class CameraUI extends Entity implements ICamera
     public void render(SpriteBatch spriteBatch)
     {
         spriteBatch.begin();
-        _camera.position.set(getTransform().position.x, getTransform().position.y, 0);
+        _camera.position.set(getTransform().getPosition().x, getTransform().getPosition().y, 0);
         _camera.update();
         spriteBatch.setProjectionMatrix(_camera.combined);
         for (IRenderer renderer : _sortedRenderers.values())

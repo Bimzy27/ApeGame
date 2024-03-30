@@ -6,4 +6,12 @@ public class ActionExecutor
     {
         action.execute(objects);
     }
+
+    public static void performAction(ActionBinding actionBinding, Object... objects)
+    {
+        for (IAction action : actionBinding.getActions())
+        {
+            action.execute(objects);
+        }
+    }
 }

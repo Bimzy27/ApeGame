@@ -34,4 +34,8 @@ public class VectorUtilities {
         // Return true if there is both X and Y intersection
         return intersectsX && intersectsY;
     }
+
+    public static Vector2 Lerp(Vector2 start, Vector2 end, float alpha) {
+        return new Vector2(start.x + alpha * (end.x - start.x), start.y + alpha * (end.y - start.y));
+    }
 }
