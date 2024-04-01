@@ -33,6 +33,11 @@ public class TextRenderer implements IComponent, IRenderer
         _cameraLayer = cameraLayer;
     }
 
+    public TextRenderer(String text, RectBounds rectBounds, int sortOrder)
+    {
+        this(text, rectBounds, sortOrder, CameraLayer.UI);
+    }
+
     @Override
     public void Initialize(Entity entity)
     {
@@ -52,7 +57,6 @@ public class TextRenderer implements IComponent, IRenderer
 
     @Override
     public void Deinitialize() {
-        _font.dispose();
         _camera.removeRenderer(this);
     }
 
